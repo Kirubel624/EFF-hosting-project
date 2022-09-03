@@ -1,0 +1,357 @@
+
+//#include "dht.h"
+#include <dht.h>
+
+dht DHT;
+
+//int DHT11_PIN=7;
+const int trigPin = 9;
+const int echoPin = 10;
+float duration, distance; 
+String inputString = "";         // a String to hold incoming data
+bool stringComplete = false;  // whether the string is complete
+const int voltageSensor = A2;
+float currentvalue = 0.0f; // current display variable
+float AcsValue = 0.0f; // current reading variable
+float vOUT = 0.0;
+float vIN = 0.0;
+float R1 = 30000.0;
+float R2 = 7500.0;
+int value = 0;
+int temp;
+int humid;
+int tempChange=0;
+int humidChange=0;
+char C;
+float vINchange=0;
+int percentageoil=100;
+float oillevel=0.0;
+int current=0;
+void setup() {
+   Serial.begin(9600); 
+    delay(500);//Delay to let system boot
+  // put your setup code here, to run once:
+ pinMode(trigPin, OUTPUT); 
+ pinMode(echoPin, INPUT); 
+//  pinMode(13, OUTPUT); 
+   pinMode(12, OUTPUT); 
+    pinMode(6, OUTPUT); 
+  pinMode(A1,INPUT);
+//
+//  Serial.println("Transformer Health Monitoring System\n\n");
+//  
+//  Serial.println("1.Send T to see temperature\n\n");
+//    Serial.println("2.Send O to see oil level\n\n");
+//  Serial.println("3.Send H to see humidity\n\n");
+//      Serial.println("4.Send C to see current\n\n");
+//        Serial.println("5.Send V to see voltage\n\n");
+//  delay(10000);//Wait before accessing Sensor
+  
+}
+
+void loop() {
+  
+  // put your main code here, to run repeatedly:
+  DHT.read11(A1);
+//        Serial.print("the Temperature is " );   
+temp=DHT.temperature;
+humid=DHT.humidity;
+ int myArray[]={temp, humid};
+  value= analogRead(voltageSensor);
+    vOUT = (value * 5.0) / 1024.0;
+  vIN = vOUT / (R2/(R1+R2));
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+  // Calculating the distance
+  distance = duration * 0.034 / 2;
+  oillevel=(100*distance-264)/20;
+  oillevel-=100;
+  oillevel*=-1;
+  if(oillevel<0){
+    oillevel=0;
+  }
+   if(oillevel>100){
+    oillevel=100;
+  }
+// if(distance<=3){
+//   digitalWrite(6,LOW);
+////   delay(100);
+//oillevel=100;
+//  digitalWrite(12,HIGH);
+//  delay(100);
+//    }
+//     else if(distance>3 && distance<=5){
+//          digitalWrite(12,LOW);
+//          delay(100);
+//oillevel=90;
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//    }
+//      else if(distance>5 && distance<=6){
+//          digitalWrite(12,LOW);
+////          delay(100);
+//oillevel=80;
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//    }
+//          else if(distance>6 && distance<=7){
+//          digitalWrite(12,LOW);
+////          delay(100);
+//oillevel=70;
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//    }
+//    else if(distance>7 && distance<=8){
+//          digitalWrite(12,LOW);
+////          delay(100);
+//oillevel=60;
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//    }
+//       else if(distance>8 && distance<=9){
+//          digitalWrite(12,LOW);
+////          delay(100);
+//oillevel=50;
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//    }
+//       else if(distance>9 && distance<=10){
+//          digitalWrite(12,LOW);
+////          delay(100);
+//oillevel=40;
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//    }else{
+//       digitalWrite(12,LOW);
+//          
+//oillevel="<40";
+//delay(100);
+//  digitalWrite(6,HIGH);
+//    }
+    int adc = analogRead(A3);
+  float voltage = adc * 5 / 1023.0;
+  float current = (voltage - 2.5) / 0.185;
+  current*=-1;
+//  if (current < 0.16) {
+//    current = 0;
+//  }
+//  Serial.print("Current : ");
+//  Serial.println(current);
+  delay(300);
+ 
+if(temp!=tempChange||humid!=humidChange||vIN!=vINchange){
+  Serial.println(String(temp) + " " +String(humid)+ " " + String(vIN)+ " " + String(oillevel) + " " + String(current)
+//  + " " + String(distance)
+  ); 
+ 
+  tempChange=temp;
+    humidChange=humid;
+}
+//delay(5000);
+//if(humid!=humidChange){
+//  Serial.println(humid); 
+//  humidChange=humid;
+//}
+//        int myArray[2]={temp, humid};
+//        Serial.print("the humidity is ");   Serial.print(DHT.humidity);
+//   Serial.println("%  ");
+  // Clears the trigPin
+
+  // Prints the distance on the Serial Monitor
+//  Serial.print("Distance: ");
+//for(int i=0; i<percentage; i--){
+//  
+//}
+//if (distance-=1&&distance>1&&percentageoil<100){
+//  percentageoil-=10;
+//  Serial.println(percentageoil);
+//}else if(distance+=1&&distance<10&&percentageoil<100)
+//{
+//    percentageoil+=10;
+//  Serial.println(percentageoil);
+//}
+ 
+ delay(1000); 
+//         delay(1000);
+ if (stringComplete) {
+  DHT.read11(A1);
+//         Serial.print(DHT.temperature); 
+//    Serial.print("Current humidity = ");
+//    Serial.print(DHT.humidity);
+//    Serial.print("%  ");
+//    Serial.print("temperature = ");
+//    Serial.print(DHT.temperature); 
+//    Serial.println("C  ");
+//    
+    delay(1000);//Wait 5 seconds before accessing sensor again.
+//  Serial.print("the Temperature is " );   
+//     Serial.print(DHT.temperature); 
+//    Serial.println("C  ");
+    if (inputString.equals("T\n")){
+     Serial.print("the Temperature is " );   
+     Serial.print(DHT.temperature); 
+    Serial.println("C  ");
+    
+    delay(1000);//Wait 5 seconds before accessing sensor again.
+     stringComplete = false ;
+     inputString="";
+    }
+   else if (inputString.equals("H\n")){
+     Serial.print("the humidity is ");   Serial.print(DHT.humidity);
+    Serial.println("%  ");
+    
+    delay(1000);//Wait 5 seconds before accessing sensor again.
+      stringComplete = false ;
+      inputString="";
+    } 
+    else if (inputString.equals("C\n")){
+       AcsValue= analogRead(A3);
+
+  currentvalue = (2.5 - (AcsValue * (5.0 / 1024.0)) ) / 0.185; 
+  // 2.5 is the voltage of mean error so needs to be seperated.
+  // AcsValue is the current sensor value. 
+  // 5/1024 are the number of steps.
+  // 0.185 is the voltage change per 1 amperes. 
+//   currentvalue= meanvoltageerror - (sensorvalue * (voltage/resolution))// voltage change per Ampere
+  Serial.print("initialValue: ");
+  Serial.print(AcsValue);
+  Serial.println("mV");
+  Serial.print(currentvalue*1000);
+  Serial.print("mA");
+//     Serial.println("the Current is ="+value);
+      stringComplete = false ;
+      inputString="";
+    }
+ else if (inputString.equals("V\n")){
+ value= analogRead(voltageSensor);
+    vOUT = (value * 5.0) / 1024.0;
+  vIN = vOUT / (R2/(R1+R2));
+     Serial.print("the Voltage is = "); Serial.println(vIN);
+      stringComplete = false ;
+      inputString="";
+    }
+     else if (inputString.equals("O\n")){
+//     Serial.println("the Oil-Level is ");
+
+digitalWrite(trigPin, LOW); 
+ delayMicroseconds(2); 
+ digitalWrite(trigPin, HIGH); 
+ delayMicroseconds(10); 
+ digitalWrite(trigPin, LOW); 
+ duration = pulseIn(echoPin, HIGH); 
+ distance = (duration*.0343)/2; 
+  Serial.print(""); 
+ Serial.println(distance); 
+ delay(100); 
+ if(distance<=5){
+   digitalWrite(6,LOW);
+//   delay(100);
+Serial.println("Oil-level is 100% ");
+  digitalWrite(12,HIGH);
+//  delay(100);
+    }
+     else if(distance<=10 && distance>=6){
+          digitalWrite(12,LOW);
+//          delay(100);
+Serial.println("Oil-level is 90% ");
+  digitalWrite(6,HIGH);
+//  delay(100);
+    }
+      else if(distance<=15 && distance>=11){
+          digitalWrite(12,LOW);
+//          delay(100);
+Serial.println("Oil-level is 80% ");
+  digitalWrite(6,HIGH);
+//  delay(100);
+    }
+         else if(distance<=20 && distance>=16){
+          digitalWrite(12,LOW);
+//          delay(100);
+Serial.println("Oil-level is 70% ");
+  digitalWrite(6,HIGH);
+//  delay(100);
+    }
+             else if(distance>=21 && distance<=25){
+          digitalWrite(12,LOW);
+//          delay(100);
+Serial.println("Oil-level is 60% ");
+  digitalWrite(6,HIGH);
+//  delay(100);
+    }
+      else if(distance>=26){
+          digitalWrite(12,LOW);
+//          delay(100);
+Serial.println("Oil-level is 50% ");
+  digitalWrite(6,HIGH);
+//  delay(100);
+    }
+    else{
+      digitalWrite(12,LOW);
+      digitalWrite(6,LOW);
+    }
+
+     
+      stringComplete = false ;
+      inputString="";
+    }
+     else {
+       Serial.println("unknown");
+        stringComplete = false ;
+        inputString="";
+    }
+   
+     }  
+  
+
+
+}
+void serialEvent() {
+  while (Serial.available()) {
+    // get the new byte:
+    char inChar = (char)Serial.read();
+    // add it to the inputString:
+    inputString += inChar;
+    // if the incoming character is a newline, set a flag so the main loop can
+    // do something about it:
+    if (inChar == '\n') {
+      stringComplete = true;
+    }
+  }
+}
+
+const [last_name,setlast_name]= useState("")
+    const [middle_name,setmiddle_name]= useState("")
+    const [thumbImage,setthumbImage]=useState([])
+    const [email,setemail]= useState("")
+    const [dob,setdob]=useState('')
+    const [gender,setgender]= useState("")
+    const [place_of_birth,setplace_of_birth]= useState("")
+    const [nationality,setnationality]= useState("")
+    const [passport_number,setpassport_number]= useState("")
+    const [educationsreal, seteducationsreal] = useState('');
+    const [experience,setexperience]= useState("")
+    const [coach_phone_one,setcoach_phone_one]= useState("")
+    const [coach_phone_two,setcoach_phone_two]= useState("")
+    const [certification_id,setcertification_id]= useState("")
+    const [educational_state,seteducational_state]= useState("")
+    const [date_of_certificate_concede,setdate_of_certificate_concede]= useState("")
+    const [place_of_certificate_concede,setplace_of_certificate_concede]= useState("")
+    const [fileSingle,setfileSingle]=useState([])
+
+
+
+
+
+
+
+
+
+
+
+
