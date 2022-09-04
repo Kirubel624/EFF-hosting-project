@@ -158,7 +158,7 @@ navigate('/admin/coaches')
     const [first_name,setfirst_name]= useState("")
     const [last_name,setlast_name]= useState("")
     const [middle_name,setmiddle_name]= useState("")
-    const [thumbImage,setthumbImage]=useState([])
+    const [thumbImage,setthumbImage]=useState([''])
     const [email,setemail]= useState("")
     const [dob,setdob]=useState('')
     const [gender,setgender]= useState("")
@@ -173,7 +173,7 @@ navigate('/admin/coaches')
     const [educational_state,seteducational_state]= useState("")
     const [date_of_certificate_concede,setdate_of_certificate_concede]= useState("")
     const [place_of_certificate_concede,setplace_of_certificate_concede]= useState("")
-    const [fileSingle,setfileSingle]=useState([])
+    const [fileSingle,setfileSingle]=useState([''])
 
   // const onChangeHandler = (e) => {
    

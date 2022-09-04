@@ -57,7 +57,7 @@ const CoachSchema = Schema({
     coach_phone_two: String,
     certification_id: {
         type: String,
-        required: true
+        // required: true
     },
     educational_state: {
         type: String,
@@ -65,11 +65,11 @@ const CoachSchema = Schema({
     },
     date_of_certificate_concede: {
         type: String,
-        required: true
+        // required: true
     },
     place_of_certificate_concede: {
         type: String,
-        required: true
+        // required: true
     },
     educational_document: {
         type: String,

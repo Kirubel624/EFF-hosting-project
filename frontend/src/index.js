@@ -5,7 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import "antd/dist/antd.min.css";
+// import "antd/dist/antd.min.css";
+import 'antd/dist/antd.css'
 // import "./utils/antdStyle.css";
 import { ContextProvider } from "./context/Context";
 import {store,persistor} from "./store/store";

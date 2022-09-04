@@ -11,12 +11,21 @@ import {
 import { baseURL } from "../../utils/axios";
 import axios from "axios";
 import profimg from '../../coachfiles/3-Untitled.png'
+import 'antd/dist/antd.css'
+// import Checkbox from "antd/lib/checkbox/Checkbox";
+import {Button, Checkbox } from "antd";
+
 
 const Instractors = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [education, setEducation] = useState("");
   const [instructors, setInstructors] = useState([]);
+  const [masters, setMasters] = useState("");
+const [degree,setDegree]=useState("")
+const [phd, setPhd] = useState("");
+const [diploma,setDiploma]=useState("")
+const [secondaryschool,setSecondarySchool]=useState("")
 
   // const {
   //   loading: coachesLoading,
@@ -24,12 +33,86 @@ const Instractors = () => {
   //   error: coachesError,
   // } = useSelector((state) => state.fetchCoaches);
   useEffect(() => {
-    (async function () {
+    const feachData =async ()=> {
       const data = await axios.get("http://localhost:8000/instructors");
+      let ff = [];
+      let gg;
+      if (masters) {
+        ff = [
+          ...ff,
+          ...data.data.paylaod.filter((education) => education.education ==="masters"
+          ,console.log(education.education)
+          ),
+         
+        ];
+      }
+        if (degree) {
+          ff = [
+            ...ff,
+            ...data.data.paylaod.filter((education) => education.education ==="degree"
+            ,console.log(education.education)
+            ),
+           
+          ];
+        }
+          if (diploma) {
+            ff = [
+              ...ff,
+              ...data.data.paylaod.filter((education) => education.education ==="diploma"
+              ,console.log(education.education)
+              ),
+             
+            ];
+          }
+            if (secondaryschool) {
+              ff = [
+                ...ff,
+                ...data.data.paylaod.filter((education) => education.education ==="secondary school"
+                ,console.log(education.education)
+                ),
+               
+              ];
+            }
+              if (phd) {
+                ff = [
+                  ...ff,
+                  ...data.data.paylaod.filter((education) => education.education ==="phd"
+                  ,console.log(education.education)
+                  ),
+                 
+                ];
+        // console.log(education.education);
+      }
+      if (ff.length === 0) {
+        ff = [...data.data.paylaod];
+      }
       console.log("ppppppppppppppppppp", data.data.paylaod);
-      setInstructors(data.data.paylaod);
-    })();
-  }, []);
+      setInstructors(ff);
+      console.log("::::::::::::::::::::::::::::::::::::::::::::::", ff);
+
+    };   
+     feachData();
+    
+  }, [masters,degree,diploma,secondaryschool,phd]);
+  const handleOnChange=()=>{
+    let result;
+    // education=== 
+  }
+  const handleMasters = () => {
+    setMasters(!masters);
+  };
+  const handleDegree =()=>{
+    setDegree(!degree);
+  }
+  const handleDiploma =()=>{
+    setDiploma(!diploma);
+  }
+  const handlePhd=()=>{
+    setPhd(!phd);
+  }
+  const handleSecondarySchool =()=>{
+    setSecondarySchool(!secondaryschool);
+  }
   return (
     <div>
       {/* <Modal open={error}>
@@ -73,19 +156,18 @@ const Instractors = () => {
             <div className="pl-2">
               <span>Educational Status</span>
             </div>
-            <div className="px-2 py-1 border rounded-md shadow-sm flex space-x-2 w-fit mb-8">
-              <select
-                className="border-0 outline-none bg-white"
-                value={education}
-                onChange={(e) => setEducation(e.target.value)}
-              >
-                <option value="">all</option>
-                <option value="secondary school">secondary school</option>
-                <option value="diploma">diploma</option>
-                <option value="degree">degree</option>
-                <option value="masters">masters</option>
-                <option value="phd">phd</option>
-              </select>
+            <div className="px-2 py-2 my-4 border rounded-md shadow-sm flex space-x-2 w-fit mb-8">
+            <Checkbox name="freelance" onChange={(e) => handleSecondarySchool()}>
+            Secondary school
+          </Checkbox>
+{/* <Button>not working</Button> */}
+<Checkbox name="freelance" onChange={(e) => handleDiploma()}>
+Diploma
+          </Checkbox>
+          <Checkbox onChange={(e) => handleDegree()}>Degree</Checkbox>
+          <Checkbox onChange={(e) => handleMasters()}>Masters</Checkbox>
+         
+          <Checkbox onChange={(e) => handlePhd()}>Phd</Checkbox>
             </div>
           </div>
           <table className="w-full p-2 shadow-md rounded-lg">

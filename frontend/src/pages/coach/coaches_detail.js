@@ -27,7 +27,7 @@ const CoachesDetail = () => {
         `http://localhost:8000/coaches/${params.id}`
       );
       console.log("wwwwwwwwwwwwwwwwwwwww", data.data?.data);
-      console.log("wwwwwwwwwwwwwwwwwwwww", data.data?.data._id);
+      // console.log("wwwwwwwwwwwwwwwwwwwww", data.data?.data._id);
 
       setData(data.data?.data);
     })();

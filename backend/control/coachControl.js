@@ -6,14 +6,6 @@ module.exports.CreateCoach = wrapAsync(async function (req, res) {
     "aefshyjgtfrewdfrghjgrewgthyjtrewqdefrg-===================================="
   );
   const data = req.body;
-  // const newCoach = await Coach.create(req.body);
-  // res.status(200).json({
-  //   success: "success",
-  //   data: newCoach,
-  // });
-  console.log(req.body);
-
-  //     console.log(req.files.fileSingle)
   if (
     !(
       data.first_name &&
@@ -27,20 +19,30 @@ module.exports.CreateCoach = wrapAsync(async function (req, res) {
       data.passport_number &&
       data.education &&
       data.experience &&
-      data.coach_phone_one &&
-      data.certification_id &&
-      data.date_of_certificate_concede &&
-      data.place_of_certificate_concede
+      data.coach_phone_one 
+      // data.certification_id &&
+      // data.date_of_certificate_concede &&
+      // data.place_of_certificate_concede
     )
   ) {
     return res.json("All inputs are required");
   }
-      console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq-====================================")
-      let photo = req.files.thumbImage[0].filename
-      let educationDocument = req.files.fileSingle[0].filename
-      // data.educational_state
-      console.log(req.files.fileSingle)
-      console.log(req.files.thumbImage)
+  // const newCoach = await Coach.create(req.body);
+  // res.status(200).json({
+  //   success: "success",
+  //   data: newCoach,
+  // });
+  console.log(req.body);
+  console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq-====================================")
+  let photo = req.files?.thumbImage[0]?.filename
+  let educationDocument = req.files?.fileSingle[0]?.filename
+  // data.educational_state
+  console.log(req.files.fileSingle)
+  console.log(req.files.thumbImage)
+  //     console.log(req.files.fileSingle)
+
+  
+      console.log("hmmmmmmmmmmmmmmmmmm")
   const dataToBeInserted = {
     first_name: data.first_name,
     middle_name: data.middle_name,
@@ -105,17 +107,17 @@ module.exports.editCoach = wrapAsync(async function (req, res) {
       data.education &&
       data.experience &&
       data.coach_phone_one &&
-      data.certification_id &&
-      data.educational_state &&
-      data.date_of_certificate_concede &&
-      data.place_of_certificate_concede
+      // data.certification_id &&
+      data.educational_state 
+      // data.date_of_certificate_concede &&
+      // data.place_of_certificate_concede
     )
   ) {
     return res.json("All inputs are required");
   }
 
-  let photo = req.files.thumbImage[0].filename;
-  let educationDocument = req.files.fileSingle[0].filename;
+  let photo = req.files.thumbImage[0]?.filename;
+  let educationDocument = req.files.fileSingle[0]?.filename;
   const dataToBeInserted = {
     first_name: data.first_name,
     middle_name: data.middle_name,
