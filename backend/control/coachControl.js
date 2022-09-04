@@ -107,10 +107,10 @@ module.exports.editCoach = wrapAsync(async function (req, res) {
       data.education &&
       data.experience &&
       data.coach_phone_one &&
-      // data.certification_id &&
-      data.educational_state 
-      // data.date_of_certificate_concede &&
-      // data.place_of_certificate_concede
+      data.certification_id &&
+      data.educational_state  &&
+      data.date_of_certificate_concede &&
+      data.place_of_certificate_concede
     )
   ) {
     return res.json("All inputs are required");
