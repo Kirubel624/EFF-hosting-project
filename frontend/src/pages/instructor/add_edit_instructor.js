@@ -592,7 +592,7 @@ const AddEditInstructor = () => {
                 }
               );
               // console.log(fd);
-                // navigate("/admin/instructors");
+                navigate("/admin/instructors");
             }}
             type="submit"
           >
