@@ -9,6 +9,7 @@ import { fetchCoaches, resetCoaches } from "../../store/coach/actions";
 import { baseURL } from "../../utils/axios";
 import 'antd/dist/antd.css'
 // import Checkbox from "antd/lib/checkbox/Checkbox";
+// import {baseURL} from '../../utils/axios'
 import {Button, Checkbox } from "antd";
 const Coaches = () => {
   const navigate = useNavigate();
@@ -230,7 +231,7 @@ CAF D COACH
                       <div className="flex items-center justify-center">
                         <img
                           className="h-14 w-14 rounded-full object-cover"
-                          src={`${coach.photo}`}
+                          src={`${baseURL}/${coach.photo}`}
                           alt= "profileimage"
                         />
                       </div>

@@ -140,7 +140,7 @@ const Login = () => {
             >
               login
             </button>
-            {error && <label className="text-red-500 text-5xl">Something went wrong...</label>}
+            {error && <label className="text-red-500 text-2xl">Something went wrong...</label>}
           </div>
         </form>
       </div>

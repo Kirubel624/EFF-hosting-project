@@ -1,4 +1,4 @@
-import instance from "../../utils/axios";
+import instance, { baseURL } from "../../utils/axios";
 import { Form, useFormik } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -260,7 +260,7 @@ navigate('/admin/instrctors')
                   <img src={image} alt="profileimagehere" className="h-full w-full object-cover" />
                 )}
                
-              </div>       <img className="pl-24 pt-2 h-36 " src={`/instructor_files/${data?.photo}`} alt="profile_image_here"/></div> 
+              </div>       <img className="pl-24 pt-2 h-36 " src={`${baseURL}/${data?.photo}`} alt="profile_image_here"/></div> 
          
             <div className="flex flex-col">
               <label>first name</label>
@@ -499,7 +499,7 @@ navigate('/admin/instrctors')
                     <button
                           onClick={() => {
                             window.open(
-                              `/instructor_files/${data.educational_document}`,
+                              `${baseURL}/${data.educational_document}`,
                               "_blank"
                             );
                           }}

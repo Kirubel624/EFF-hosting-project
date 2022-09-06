@@ -85,7 +85,7 @@ console.log(data)
             <div className="flex p-7">
               <img
                 className="h-36 w-36 object-cover mr-4"
-                src={ `${data.photo}`}
+                src={`${baseURL}/${data.photo}`}
                 alt= "profileimage"
               />
               <div className="grid grid-cols-2 gap-x-2 capitalize ">
@@ -185,7 +185,7 @@ console.log(data)
                         <button
                           onClick={() => {
                             window.open(
-                              `${data.educational_document}`,
+                              `${baseURL}/${data.educational_document}`,
                               "_blank"
                             );
                           }}

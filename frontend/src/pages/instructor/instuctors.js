@@ -261,7 +261,7 @@ CAF D Instructor
                       <div className="flex items-center justify-center">
                         <img
                           className="h-14 w-14 rounded-full object-cover"
-                          src={`${instructor.photo}`}
+                          src={`${baseURL}/${instructor.photo}`}
                           alt= "profileimage"
                         />
                       </div>

@@ -34,8 +34,8 @@ module.exports.CreateCoach = wrapAsync(async function (req, res) {
   // });
   console.log(req.body);
   console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq-====================================")
-  let photo = req.files?.thumbImage[0]?.path
-  let educationDocument = req.files?.fileSingle[0]?.path
+  let photo = req.files?.thumbImage[0]?.filename
+  let educationDocument = req.files?.fileSingle[0]?.filename
   // data.educational_state
   console.log(req.files.fileSingle)
   console.log(req.files.thumbImage)
