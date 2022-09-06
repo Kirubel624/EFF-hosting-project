@@ -171,12 +171,12 @@ const AddEditInstructor = () => {
     const [place_of_birth,setplace_of_birth]= useState("")
     const [nationality,setnationality]= useState("")
     const [passport_number,setpassport_number]= useState("")
-    const [education, seteducation] = useState('');
+    const [education, seteducation] = useState('secondary school');
     const [experience,setexperience]= useState("")
     const [instractor_phone_one,setinstractor_phone_one]= useState("")
     const [instractor_phone_two,setinstractor_phone_two]= useState("")
     const [certification_id,setcertification_id]= useState("")
-    const [educational_state,seteducational_state]= useState("")
+    const [educational_state,seteducational_state]= useState("Medium Instructor")
     const [date_of_certificate_concede,setdate_of_certificate_concede]= useState("")
     const [place_of_certificate_concede,setplace_of_certificate_concede]= useState("")
     const [fileSingle,setfileSingle]=useState([])
@@ -489,14 +489,14 @@ const AddEditInstructor = () => {
                 onChange={(e) => seteducational_state(e.target.value)}
                 id="educational_state"
               >
-                <option value="Medium Instractor">Medium Instractor</option>
-                <option value="Higher Instractor">Higher Instractor</option>
-                <option value="CAF D Instractor">CAF D Instractor</option>
-                <option value="CAF C Instractor">CAF C Instractor</option>
-                <option value="CAF B Instractor">CAF B Instractor</option>
-                <option value="CAF A Instractor">CAF A Instractor</option>
-                <option value="CAF Pro Instractor">CAF Pro Instractor</option>
-                <option value="FIFA Instractor">FIFA Instractor</option>
+                <option value="Medium Instructor">Medium Instractor</option>
+                <option value="Higher Instructor">Higher Instractor</option>
+                <option value="CAF D Instructor">CAF D Instractor</option>
+                <option value="CAF C Instructor">CAF C Instractor</option>
+                <option value="CAF B Instructor">CAF B Instractor</option>
+                <option value="CAF A Instructor">CAF A Instractor</option>
+                <option value="CAF Pro Instructor">CAF Pro Instractor</option>
+                <option value="FIFA Instructor">FIFA Instractor</option>
             
               </select>
             </div>

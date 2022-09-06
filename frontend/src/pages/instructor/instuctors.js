@@ -21,97 +21,153 @@ const Instractors = () => {
   const dispatch = useDispatch();
   const [education, setEducation] = useState("");
   const [instructors, setInstructors] = useState([]);
-  const [masters, setMasters] = useState("");
-const [degree,setDegree]=useState("")
-const [phd, setPhd] = useState("");
-const [diploma,setDiploma]=useState("")
-const [secondaryschool,setSecondarySchool]=useState("")
 
+const [mediumInstructor, setMediumInstructor] = useState("");
+const [higherInstructor,setHigherInstructor]=useState("")
+const [CAFDInstructor, setCAFDInstructor] = useState("");
+const [CAFCInstructor,setCAFCInstructor]=useState("")
+const [CAFBInstructor,setCAFBInstructor]=useState("")
+const [CAFAInstructor,setCAFAInstructor]=useState("")
+const [CAFPROInstructor,setCAFPROInstructor]=useState("")
+const[fIfaInstractor,setFIFAInstractor]=useState('')
   // const {
-  //   loading: coachesLoading,
-  //   data: coaches,
-  //   error: coachesError,
-  // } = useSelector((state) => state.fetchCoaches);
+  //   loading: InstructoresLoading,
+  //   data: Instructores,
+  //   error: InstructoresError,
+  // } = useSelector((state) => state.fetchInstructores);
   useEffect(() => {
     const feachData =async ()=> {
       const data = await axios.get("http://localhost:8000/instructors");
       let ff = [];
       let gg;
-      if (masters) {
+      if (mediumInstructor) {
         ff = [
           ...ff,
-          ...data.data.paylaod.filter((education) => education.education ==="masters"
-          ,console.log(education.education)
+          ...data.data.paylaod.filter((education) => education.educational_state ==="Medium Instructor"
+          
           ),
          
         ];
       }
-        if (degree) {
+        if (higherInstructor) {
           ff = [
             ...ff,
-            ...data.data.paylaod.filter((education) => education.education ==="degree"
+            ...data.data.paylaod.filter((education) => education.educational_state ==="Higher Instructor"
             ,console.log(education.education)
             ),
            
           ];
+
+
+          
         }
-          if (diploma) {
+          if (CAFDInstructor) {
             ff = [
               ...ff,
-              ...data.data.paylaod.filter((education) => education.education ==="diploma"
+              ...data.data.paylaod.filter((education) => education.educational_state ==="CAF D Instructor"
               ,console.log(education.education)
               ),
              
             ];
           }
-            if (secondaryschool) {
+            if (CAFCInstructor) {
               ff = [
                 ...ff,
-                ...data.data.paylaod.filter((education) => education.education ==="secondary school"
+                ...data.data.paylaod.filter((education) => education.educational_state ==="CAF C Instructor"
                 ,console.log(education.education)
                 ),
                
               ];
             }
-              if (phd) {
+              if (CAFBInstructor) {
                 ff = [
                   ...ff,
-                  ...data.data.paylaod.filter((education) => education.education ==="phd"
+                  ...data.data.paylaod.filter((education) => education.educational_state ==="CAF B Instructor"
                   ,console.log(education.education)
                   ),
                  
                 ];
         // console.log(education.education);
       }
+
+      if (CAFAInstructor) {
+        ff = [
+          ...ff,
+          ...data.data.paylaod.filter((education) => education.educational_state ==="CAF A Instructor"
+          ,console.log(education.education)
+          ),
+         
+        ];
+// console.log(education.education);
+}
+if (CAFPROInstructor) {
+  ff = [
+    ...ff,
+    ...data.data.paylaod.filter((education) => education.educational_state ==="CAF Pro Instructor"
+    ,console.log(education.education)
+    ),
+   
+  ];
+// console.log(education.education);
+}
+if(fIfaInstractor){
+  ff = [
+    ...ff,
+    ...data.data.paylaod.filter((education) => education.educational_state === "FIFA Instructor"
+    ,
+    ),
+  ];
+}
+// if (fIfaInstractor) {
+//   ff = [
+//     ...ff,
+//     ...data.data.paylaod.filter((education) => education.educational_state ==="FIFA Instractor"
+//     ,console.log(data.data.paylaod)
+//     ),
+   
+//   ];
+// // console.log(education.education);
+// }
       if (ff.length === 0) {
         ff = [...data.data.paylaod];
       }
-      console.log("ppppppppppppppppppp", data.data.paylaod);
+      // console.log("ppppppppppppppppppp", data.data.paylaod);
       setInstructors(ff);
       console.log("::::::::::::::::::::::::::::::::::::::::::::::", ff);
 
     };   
      feachData();
     
-  }, [masters,degree,diploma,secondaryschool,phd]);
+  }, [mediumInstructor,higherInstructor,CAFDInstructor,CAFCInstructor,CAFBInstructor,CAFAInstructor,CAFPROInstructor,fIfaInstractor]);
   const handleOnChange=()=>{
     let result;
     // education=== 
   }
-  const handleMasters = () => {
-    setMasters(!masters);
+  const handleMediumInstructor = () => {
+    setMediumInstructor(!mediumInstructor);
   };
-  const handleDegree =()=>{
-    setDegree(!degree);
+  const handlehigherInstructor =()=>{
+    setHigherInstructor(!higherInstructor);
   }
-  const handleDiploma =()=>{
-    setDiploma(!diploma);
+  const handleCAFDInstructor =()=>{
+    setCAFDInstructor(!CAFDInstructor);
   }
-  const handlePhd=()=>{
-    setPhd(!phd);
+  const handleCAFCInstructor=()=>{
+    setCAFCInstructor(!CAFCInstructor);
   }
-  const handleSecondarySchool =()=>{
-    setSecondarySchool(!secondaryschool);
+  const handleCAFBInstructor =()=>{
+    setCAFBInstructor(!CAFBInstructor);
+  }
+  const handleCAFAInstructor=()=>{
+    setCAFAInstructor(!CAFAInstructor);
+
+  }
+  const handleCAFPROInstructor=()=>{
+    setCAFPROInstructor(!CAFPROInstructor);
+    
+  }
+  const handleFifaInstructor=()=>{
+    setFIFAInstractor(!fIfaInstractor);
   }
   return (
     <div>
@@ -157,17 +213,21 @@ const [secondaryschool,setSecondarySchool]=useState("")
               <span>Educational Status</span>
             </div>
             <div className="px-2 py-2 my-4 border rounded-md shadow-sm flex space-x-2 w-fit mb-8">
-            <Checkbox name="freelance" onChange={(e) => handleSecondarySchool()}>
-            Secondary school
+            <Checkbox onChange={(e) => handleMediumInstructor()}>Medium Instructor</Checkbox>
+            <Checkbox name="freelance" onChange={(e) => handlehigherInstructor()}>
+            Higher Instructor
           </Checkbox>
 {/* <Button>not working</Button> */}
-<Checkbox name="freelance" onChange={(e) => handleDiploma()}>
-Diploma
+<Checkbox name="freelance" onChange={(e) => handleCAFDInstructor()}>
+CAF D Instructor
           </Checkbox>
-          <Checkbox onChange={(e) => handleDegree()}>Degree</Checkbox>
-          <Checkbox onChange={(e) => handleMasters()}>Masters</Checkbox>
+          <Checkbox onChange={(e) => handleCAFCInstructor()}>CAF C Instructor</Checkbox>
+      
          
-          <Checkbox onChange={(e) => handlePhd()}>Phd</Checkbox>
+          <Checkbox onChange={(e) => handleCAFBInstructor()}>CAF B Instructor</Checkbox>
+          <Checkbox onChange={(e) => handleCAFAInstructor()}>CAF A Instructor</Checkbox>
+          <Checkbox onChange={(e) => handleCAFPROInstructor()}>CAF PRO Instructor</Checkbox>
+          <Checkbox onChange={(e) => handleFifaInstructor()}>FIFA Instractor</Checkbox>
             </div>
           </div>
           <table className="w-full p-2 shadow-md rounded-lg">
@@ -201,7 +261,7 @@ Diploma
                       <div className="flex items-center justify-center">
                         <img
                           className="h-14 w-14 rounded-full object-cover"
-                          src={`/instructor_files/${instructor.photo}`}
+                          src={`${instructor.photo}`}
                           alt= "profileimage"
                         />
                       </div>

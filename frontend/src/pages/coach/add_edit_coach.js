@@ -592,7 +592,7 @@ const AddEditCoach = () => {
                 }
               );
               // console.log(fd);
-                navigate("/admin/coaches");
+                // navigate("/admin/coaches");
             }}
             type="submit"
           >

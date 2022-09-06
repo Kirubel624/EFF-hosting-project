@@ -10,8 +10,8 @@ module.exports.CreateInstractor = wrapAsync(async function (req, res) {
         return res.json("All inputs are required");
     }
 
-    let photo = req.files.thumbImage[0].filename
-    let educationDocument = req.files.fileSingle[0].filename
+    let photo = req.files.thumbImage[0].path
+    let educationDocument = req.files.fileSingle[0].path
 
     console.log(req.files.fileSingle)
     console.log(req.files.thumbImage)

@@ -4,15 +4,16 @@ const multer = require('multer')
 const path = require('path')
 const InstractorControls = require('../control/instructorControl');
 const { isLoggedIn } = require('../utils/isLoggedIn')
+const {storage} = require('../cloudinary');
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../../frontend/public/instructor_files"))
-    },
-    filename: function (req, file, cb) {
-        cb(null, Math.floor(Math.random() * 100).toString() + '-' + file.originalname);
-    }
-});
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, path.join(__dirname, "../../frontend/public/instructor_files"))
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Math.floor(Math.random() * 100).toString() + '-' + file.originalname);
+//     }
+// });
 
 
 

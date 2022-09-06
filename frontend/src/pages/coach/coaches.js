@@ -15,11 +15,13 @@ const Coaches = () => {
   const dispatch = useDispatch();
   const [education, setEducation] = useState("");
   const [coaches, setCoaches] = useState([]);
-  const [masters, setMasters] = useState("");
-  const [degree,setDegree]=useState("")
-  const [phd, setPhd] = useState("");
-  const [diploma,setDiploma]=useState("")
-  const [secondaryschool,setSecondarySchool]=useState("")
+  const [firstLevel, setFirstLevel] = useState("");
+  const [secondLevel,setsecondLevel]=useState("")
+  const [CAFDCoach, setCAFDCoach] = useState("");
+  const [CAFCCoach,setCAFCCoach]=useState("")
+  const [CAFBCoach,setCAFBCoach]=useState("")
+  const [CAFACoach,setCAFACoach]=useState("")
+  const [CAFPROCoach,setCAFPROCoach]=useState("")
   console.log(education)
   // const {
   //   loading: coachesLoading,
@@ -31,52 +33,77 @@ const Coaches = () => {
       const data = await axios.get("http://localhost:8000/coaches");
       let ff = [];
       let gg;
-      if (masters) {
+      if (firstLevel) {
         ff = [
           ...ff,
-          ...data.data.paylaod.filter((education) => education.education ==="masters"
+          ...data.data.paylaod.filter((education) => education.educational_state ==="First Level"
           ,console.log(education.education)
           ),
          
         ];
       }
-        if (degree) {
+        if (secondLevel) {
           ff = [
             ...ff,
-            ...data.data.paylaod.filter((education) => education.education ==="degree"
+            ...data.data.paylaod.filter((education) => education.educational_state ==="Second Level"
             ,console.log(education.education)
             ),
            
           ];
+
+
+          
         }
-          if (diploma) {
+          if (CAFDCoach) {
             ff = [
               ...ff,
-              ...data.data.paylaod.filter((education) => education.education ==="diploma"
+              ...data.data.paylaod.filter((education) => education.educational_state ==="CAF D COACH"
               ,console.log(education.education)
               ),
              
             ];
           }
-            if (secondaryschool) {
+            if (CAFCCoach) {
               ff = [
                 ...ff,
-                ...data.data.paylaod.filter((education) => education.education ==="secondary school"
+                ...data.data.paylaod.filter((education) => education.educational_state ==="CAF C Coach"
                 ,console.log(education.education)
                 ),
                
               ];
             }
-              if (phd) {
+              if (CAFBCoach) {
                 ff = [
                   ...ff,
-                  ...data.data.paylaod.filter((education) => education.education ==="phd"
+                  ...data.data.paylaod.filter((education) => education.educational_state ==="CAF B Coach"
                   ,console.log(education.education)
                   ),
                  
                 ];
         // console.log(education.education);
       }
+
+      if (CAFACoach) {
+        ff = [
+          ...ff,
+          ...data.data.paylaod.filter((education) => education.educational_state ==="CAF A Coach"
+          ,console.log(education.education)
+          ),
+         
+        ];
+// console.log(education.education);
+}
+if (CAFPROCoach) {
+  ff = [
+    ...ff,
+    ...data.data.paylaod.filter((education) => education.educational_state ==="CAF Pro Coach"
+    ,console.log(education.education)
+    ),
+   
+  ];
+// console.log(education.education);
+}
+
       if (ff.length === 0) {
         ff = [...data.data.paylaod];
       }
@@ -87,23 +114,30 @@ const Coaches = () => {
     };   
      feachData();
     
-  }, [masters,degree,diploma,secondaryschool,phd]);
-  const handleMasters = () => {
-    setMasters(!masters);
+  }, [firstLevel,secondLevel,CAFDCoach,CAFCCoach,CAFBCoach,CAFACoach,CAFPROCoach]);
+  const handleFirstLevel = () => {
+    setFirstLevel(!firstLevel);
   };
-  const handleDegree =()=>{
-    setDegree(!degree);
+  const handleSecondLevel =()=>{
+    setsecondLevel(!secondLevel);
   }
-  const handleDiploma =()=>{
-    setDiploma(!diploma);
+  const handleCAFDCOACH =()=>{
+    setCAFDCoach(!CAFDCoach);
   }
-  const handlePhd=()=>{
-    setPhd(!phd);
+  const handleCAFCCOACH=()=>{
+    setCAFCCoach(!CAFCCoach);
   }
-  const handleSecondarySchool =()=>{
-    setSecondarySchool(!secondaryschool);
+  const handleCAFBCOACH =()=>{
+    setCAFBCoach(!CAFBCoach);
   }
+  const handleCAFACOACH=()=>{
+    setCAFACoach(!CAFACoach);
 
+  }
+  const handleCAFPROCOACH=()=>{
+    setCAFPROCoach(!CAFPROCoach);
+    
+  }
   return (
     <div>
       {/* <Modal open={coachesError}>
@@ -148,17 +182,20 @@ const Coaches = () => {
               <span>Educational Status</span>
             </div>
             <div className="px-2 py-2 my-4 border rounded-md shadow-sm flex space-x-2 w-fit mb-8">
-            <Checkbox name="freelance" onChange={(e) => handleSecondarySchool()}>
-            Secondary school
+            <Checkbox onChange={(e) => handleFirstLevel()}>First Level</Checkbox>
+            <Checkbox name="freelance" onChange={(e) => handleSecondLevel()}>
+            Second Level
           </Checkbox>
 {/* <Button>not working</Button> */}
-<Checkbox name="freelance" onChange={(e) => handleDiploma()}>
-Diploma
+<Checkbox name="freelance" onChange={(e) => handleCAFDCOACH()}>
+CAF D COACH
           </Checkbox>
-          <Checkbox onChange={(e) => handleDegree()}>Degree</Checkbox>
-          <Checkbox onChange={(e) => handleMasters()}>Masters</Checkbox>
+          <Checkbox onChange={(e) => handleCAFCCOACH()}>CAF C COACH</Checkbox>
+      
          
-          <Checkbox onChange={(e) => handlePhd()}>Phd</Checkbox>
+          <Checkbox onChange={(e) => handleCAFBCOACH()}>CAF B COACH</Checkbox>
+          <Checkbox onChange={(e) => handleCAFACOACH()}>CAF A COACH</Checkbox>
+          <Checkbox onChange={(e) => handleCAFPROCOACH()}>CAF PRO COACH</Checkbox>
             </div>
           </div>
           <table className="w-full   p-2 shadow-md rounded-lg ">
@@ -193,7 +230,7 @@ Diploma
                       <div className="flex items-center justify-center">
                         <img
                           className="h-14 w-14 rounded-full object-cover"
-                          src={`/coach_files/${coach.photo}`}
+                          src={`${coach.photo}`}
                           alt= "profileimage"
                         />
                       </div>
